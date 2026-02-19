@@ -1,0 +1,9 @@
+# CircuitPython / Python
+__pycache__/
+*.pyc
+*.pyo
+*.mpy
+.DS_Store
+.vscode/
+.env
+*.log
