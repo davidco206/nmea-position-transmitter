@@ -17,8 +17,9 @@ import digitalio
 
 # ----------------------- USER CONFIG -----------------------
 # Fixed position in decimal degrees
-LATITUDE = 47.6205   # positive = N, negative = S
-LONGITUDE = -122.3493  # positive = E, negative = W
+# Mowgli Island BC Dock: 48.972657, -123.610603
+LATITUDE = 48.972657   # positive = N, negative = S
+LONGITUDE = -123.610603  # positive = E, negative = W
 
 # Fixed UTC date (DDMMYY) and start time (HHMMSS). Time will tick from this.
 START_DATE_DDMMYY = "190226"
