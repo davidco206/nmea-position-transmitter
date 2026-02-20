@@ -8,6 +8,8 @@ Wiring (typical):
 - QT Py RX -> MAX3485 RO (optional, not used)
 - QT Py GPIO (DE/RE) -> MAX3485 DE+RE (tied together)
 - MAX3485 A/B -> NMEA 0183 input (verify polarity)
+    - A is on Pin 6 (non-inverting) and B is on Pin 8 (inverting) of the MAX 34385
+    - Stanbdard Horizon GX1700B: NMEA_IN+ is green, and NMEA_IN- is white 
 """
 
 import time
