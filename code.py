@@ -8,7 +8,7 @@ Wiring (typical):
 - QT Py RX -> MAX3485 RO (optional, not used)
 - QT Py GPIO (DE/RE) -> MAX3485 DE+RE (tied together)
 - MAX3485 A/B -> NMEA 0183 input (verify polarity)
-    - A is on Pin 6 (non-inverting) and B is on Pin 8 (inverting) of the MAX 34385
+    - A is on Pin 6 (non-inverting) and B is on Pin 7 (inverting) of the MAX 34385
     - Stanbdard Horizon GX1700B: NMEA_IN+ is green, and NMEA_IN- is white 
 """
 
@@ -16,6 +16,7 @@ import time
 import board
 import busio
 import digitalio
+import neopixel
 
 # ----------------------- USER CONFIG -----------------------
 # Fixed position in decimal degrees
@@ -29,12 +30,22 @@ START_TIME_HHMMSS = "120000"
 
 # NMEA settings
 BAUDRATE = 4800
-UPDATE_HZ = 1.0
+UPDATE_HZ = 0.2  # Transmit every 5 seconds
 
 # Pin assignments (adjust for your QT Py variant)
 TX_PIN = board.TX
 RX_PIN = board.RX  # not used, but required by UART on some ports
 DE_RE_PIN = None  # e.g. board.D5 if you wired DE/RE to a GPIO
+
+# NeoPixel setup (onboard)
+NEOPIXEL_PIN = board.NEOPIXEL
+NUM_PIXELS = 1
+pixel = neopixel.NeoPixel(NEOPIXEL_PIN, NUM_PIXELS, brightness=0.3, auto_write=True)
+
+# Color definitions (RGB tuples)
+BLUE = (0, 0, 255)
+PURPLE = (128, 0, 128)
+OFF = (0, 0, 0)
 # -----------------------------------------------------------
 
 
@@ -117,8 +128,20 @@ while True:
         de_re.value = True
         time.sleep(0.002)
 
+
+    print("Transmitting GGA:", gga)
     uart.write(gga.encode("ascii"))
+    # Flash blue after GGA
+    pixel.fill(BLUE)
+    time.sleep(0.5)
+    pixel.fill(OFF)
+
+    print("Transmitting RMC:", rmc)
     uart.write(rmc.encode("ascii"))
+    # Flash purple after RMC
+    pixel.fill(PURPLE)
+    time.sleep(0.5)
+    pixel.fill(OFF)
 
     if de_re is not None:
         time.sleep(0.002)
