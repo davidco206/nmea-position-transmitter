@@ -2,6 +2,8 @@
 # SPDX-License-Identifier: MIT
 """
 CircuitPython NMEA 0183 position broadcaster for Adafruit QT Py + MAX3485.
+(c) 2026 Adelpha Systems LLC   (David J Cornfield)
+ 
 
 Wiring (typical):
 - QT Py TX -> MAX3485 DI
