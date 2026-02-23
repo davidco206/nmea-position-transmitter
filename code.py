@@ -17,8 +17,12 @@ import board
 import busio
 import digitalio
 import neopixel
+import os
 
 # ----------------------- USER CONFIG -----------------------
+
+# Print CircuitPython version and board info at startup
+print("os.uname():", os.uname())
 # Fixed position in decimal degrees
 # Mowgli Island BC Dock: 48.972657, -123.610603
 LATITUDE = 48.972657   # positive = N, negative = S
